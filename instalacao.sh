@@ -46,25 +46,25 @@ sudo apt-get upgrade -y
 #--------------------------------------------------
 clear
 echo -e "\e[31;43m***** Instalando pacotes utilitarios *****\e[0m"
-cat utilitarios | xargs sudo apt-get install -y
+cat dependencias/utilitarios | xargs sudo apt-get install -y
 
 clear
 echo -e "\e[31;43m***** Instalando pacotes Python *****\e[0m"
-cat pkg_python | xargs sudo apt-get install -y
+cat dependencias/pkg_python | xargs sudo apt-get install -y
 
 clear
 echo -e "\e[31;43m***** Instalando bibliotecas python *****\e[0m"
-cat lib_python | xargs sudo pip install 
+cat dependencias/lib_python | xargs sudo pip install 
 
 clear
 echo -e "\e[31;43m***** Instalando outros pacotes necessarios *****\e[0m"
-cat outros_pkg | xargs sudo apt-get install -y
+cat dependencias/outros_pkg | xargs sudo apt-get install -y
 
 clear
 echo -e "\e[31;43m***** Instalando dependencias pip *****\e[0m"
 sudo -H pip install --upgrade pip
 sudo -H pip install --upgrade setuptools
-cat dep_pip | xargs sudo -H pip install
+cat dependencias/dep_pip | xargs sudo -H pip install
 
 #--------------------------------------------------
 # Install PostgreSQL Server

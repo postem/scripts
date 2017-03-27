@@ -6,6 +6,7 @@ lista_apt=(dependencias/utilitarios dependencias/outros_pkg dependencias/pkg_pyt
 lista_pip=(dependencias/dep_pip )
 apt=$(dpkg --get-selections)
 pip=$(pip freeze)
+user=$(cut -d: -f1 /etc/passwd)
 echo $(date)  > requirements.log
 
 echo "
@@ -57,3 +58,59 @@ echo -e "<------------- $file ------------->" >> requirements.log
 	done
 echo >> requirements.log
 done
+
+echo "
+----------------------------- Usuario ----------------------------
+" >> requirements.log
+if [ -d /var/log/odoo ]; then
+	echo '> Diretorio de log odoo existente' >> requirements.log
+else
+	echo '> Diretorio de log odoo nao ecnontrado' >> requirements.log
+fi
+
+if [[ $(echo "$user" | grep odoo) ]]; then
+	echo '> Usuario odoo ecnontrado' >> requirements.log
+else
+	echo '> Usuario odoo nao ecnontrado' >> requirements.log
+fi
+
+if [ -d /odoo ]; then
+	echo '> Diretorio do Odoo ecnontrado na raiz' >> requirements.log
+elif [ -d /home/odoo/odoo ]; then
+	echo '> Diretorio do Odoo ecnontrado na pasta home do usuario odoo' >> requirements.log
+else
+	echo '> Diretorio do Odoo desconhecido' >> requirements.log
+fi
+
+echo "
+----------------------------- Servico ----------------------------
+" >> requirements.log
+if [ -a /etc/init.d/odoo* ]; then
+	echo '> Servico Odoo ecnontrado' >> requirements.log
+else
+	echo '> Servico Odoo nao encontrado' >> requirements.log
+fi
+
+if [ -a /etc/odoo*.conf ]; then
+	echo '> Arquivo de configuracao Odoo padrao encontrado' >> requirements.log
+else
+	echo '> Arquivo de configuracao Odoo padrao nao encontrado' >> requirements.log
+fi
+
+echo "
+---------------------------- Hardware ----------------------------
+
+$(uname -a)
+
+---------------------------- CPU
+$(sudo lscpu)
+
+---------------------------- Disco
+$(sudo df -h)
+
+---------------------------- Memoria
+$(free -m)
+" >> requirements.log
+
+
+echo "$(sudo lshw)" > harware.log
