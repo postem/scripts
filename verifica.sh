@@ -1,5 +1,4 @@
 #!/bin/bash
-. /lib/lsb/init-functions
 
 lista_apt=(dependencias/utilitarios dependencias/outros_pkg dependencias/pkg_python dependencias/dep_loc 
 	dependencias/dep_wkhtopdf dependencias/lib_python)
@@ -8,6 +7,7 @@ apt=$(dpkg --get-selections)
 pip=$(pip freeze)
 user=$(cut -d: -f1 /etc/passwd)
 echo $(date)  > requirements.log
+user_=$(whoami)
 
 echo "
 ----------------------------- Conf SO ----------------------------
@@ -76,7 +76,7 @@ fi
 
 if [ -d /odoo ]; then
 	echo '> Diretorio do Odoo ecnontrado na raiz' >> requirements.log
-elif [ -d /home/odoo/odoo ]; then
+elif [ -d /home/$user_/odoo ]; then
 	echo '> Diretorio do Odoo ecnontrado na pasta home do usuario odoo' >> requirements.log
 else
 	echo '> Diretorio do Odoo desconhecido' >> requirements.log
@@ -86,7 +86,7 @@ echo "
 ----------------------------- Servico ----------------------------
 " >> requirements.log
 if [ -a /etc/init.d/odoo* ]; then
-	echo '> Servico Odoo ecnontrado' >> requirements.log
+	echo '> Servico Odoo encontrado' >> requirements.log
 else
 	echo '> Servico Odoo nao encontrado' >> requirements.log
 fi
@@ -114,3 +114,5 @@ $(free -m)
 
 
 echo "$(sudo lshw)" > harware.log
+
+whiptail --msgbox "FINALIZADO" 7 20
