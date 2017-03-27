@@ -120,7 +120,7 @@ fi
 #--------------------------------------------------
 
 clear
-if [ $ODOO_BASE= "Sim" ]; then
+if [ $ODOO_BASE == "Sim" ]; then
   echo -e " Instalando Odoo-Server "
   sudo git clone -b 10.0 --single-branch https://github.com/BradooTech/odoo $OE_HOME_EXT/
 else
@@ -128,7 +128,7 @@ else
 fi
 
 clear
-if [ $ODOO_BRASIL = "Sim" ]; then
+if [ $ODOO_BRASIL == "Sim" ]; then
 	echo -e " Instalando Odoo-Brasil "
 	sudo git clone https://www.github.com/bradootech/odoo-brasil $OE_HOME/odoo-brasil
 else
@@ -136,15 +136,15 @@ else
 fi
 
 clear
-if [ $LOCALIZACAO = "Sim" ]; then
+if [ $LOCALIZACAO == "Sim" ]; then
 	echo -e " Instalando Localizacao TrustCode "
-	sudo git clone https://github.com/Trust-Code/trustcode-addons $OE_HOME/trust-addons
+	sudo git clone https://github.com/Trust-Code/trustcode-addons $OE_HOME/trustcode-addons
 else
   echo "Localizacao nao foi instalado por escolhado do usuario"
 fi
 
 clear
-if [ $ENTERPRISE = "Sim" ]; then
+if [ $ENTERPRISE == "Sim" ]; then
 	echo -e " Instalando Enterprise "
 	sudo git clone https://github.com/BradooDev/Enterprise $OE_HOME/enterprise
 else
@@ -252,7 +252,7 @@ esac
 exit 0
 EOF
 
-if [ $INIT_FILE = "Sim" ]; then
+if [[ $INIT_FILE == "Sim" ]]; then
   clear
   echo -e "* Security Init File"
   sudo mv /home/dev/$OE_CONFIG /etc/init.d/$OE_CONFIG
@@ -262,7 +262,7 @@ else
   echo "Init file nao selecionado"
 fi
 
-if [ $PORT_ = "Sim" ]; then
+if [[ $PORT_ == "Sim" ]]; then
   clear
   echo -e "* Change default xmlrpc port"
   sudo su root -c "echo 'xmlrpc_port = $OE_PORT' >> /etc/${OE_CONFIG}.conf"
@@ -270,7 +270,7 @@ else
   echo "Opcao de configuracao de porta nao selecioanda"
 fi
 
-if [ $INI_ODOO = "Sim" ]; then
+if [[ $INI_ODOO == "Sim" ]]; then
   echo -e "* Start ODOO on Startup"
   sudo update-rc.d $OE_CONFIG defaults
 else
