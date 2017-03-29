@@ -9,14 +9,14 @@ $ cd Scripts
 ```
 Após isso, você estará dentro da pasta principal do repositório.
 
-### Instalação
+## Instalação
 
 A seguir um guia com todas as dependências necessarias para o funcionamento do Odoo.
 
 **Importante notar que a instalação dos pacotes devem ser feitas em um ambiente "limpo", isto é, recomenda-se a instalação em um sistema novo para não ocorrer erros de incompatibilidade de pacotes quando o Odoo for executado.**
 
 
-#### - Ubuntu
+### - Ubuntu
 
 Em ambientes derivados de Debian (Ubuntu, Mint etc.) utilizamos o APT como gerenciador de pacotes, para isso podemos instalar os pacotes de duas formas.
 
@@ -30,7 +30,7 @@ $ cat /dependencias/apt/dep_apt | xargs sudo apt install
 ```
 **Vale salientar que voce deve estar dentro do diretório principal baixado deste repositório.**
 
-#### - RedHat
+### - RedHat
 
 O gerenciador de pacotes de distribuições RedHat e seus derivados é o YUM, sendo inteiramente diferente a disposição de instalação dos pacotes. Da mesma forma que o APT, podemos instalar esses dois pacotes de duas formas.
 Antes, pórem, é necessário instalar outro pacote que possibilita a instalação dos pacotes necessários.
@@ -78,3 +78,4 @@ Ou
 ```sh
 $ cat dependencias/yum/dep_pip | xargs sudo pip install 
 ```
+
