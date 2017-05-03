@@ -26,7 +26,7 @@ sudo -u postgres -- psql -c "CREATE ROLE odoo LOGIN ENCRYPTED PASSWORD 'md5f7b7b
 
 groupadd odoo
 adduser --home /odoo --shell /bin/bash -g odoo odoo
-gpasswd -a username wheel
+gpasswd -a odoo wheel
 
 sudo mkdir /var/log/odoo
 sudo chown odoo:odoo /var/log/odoo
