@@ -22,7 +22,7 @@ sudo ln -s /usr/local/bin/pip /usr/bin/
 sudo -H pip install --upgrade setuptools
 
 #Instalando os pacotes do sistema
-cat dependecias/amazon/yum | xargs sudo yum install -y --enablerepo=epel
+cat dependencias/amazon/yum | xargs sudo yum install -y --enablerepo=epel
 
 #Removendo o pip dentro da pasta de programa e criando um link com o pip local
 #Necessario porque o pip recria a imagem antiga
@@ -30,7 +30,7 @@ sudo rm -rf /usr/bin/pip
 sudo ln -s /usr/local/bin/pip /usr/bin/
 
 #Instalando as bibliotecas python
-cat dependecias/amazon/pip | xargs sudo pip install
+cat dependencias/amazon/pip | xargs sudo pip install
 
 #Adicionando o grupo e usuario Odoo, e adicionando no grupo wheel
 sudo groupadd odoo
