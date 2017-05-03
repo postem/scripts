@@ -69,3 +69,4 @@ if [ $INSTALL_DB == "Sim" ]; then
 	sudo -u postgres -- psql -c "ALTER USER postgres WITH PASSWORD '123';"
 	sudo -u postgres -- psql -c "DROP ROLE odoo;"
 	sudo -u postgres -- psql -c "CREATE ROLE odoo LOGIN ENCRYPTED PASSWORD 'md5f7b7bca97b76afe46de6631ff9f7175c' NOSUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION"
+fi
