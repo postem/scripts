@@ -9,9 +9,9 @@ libx11-6
 libxext6
 libxrender1
 libjpeg-turbo8
-gdata
-psycogreen
-ofxparse
+python-gdata
+python-psycogreen
+python-ofxparse
 node-clean-css
 node-less
 python-libxslt1 
