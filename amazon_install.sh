@@ -11,7 +11,7 @@ sudo sed -i s/"6"/"7"/g /etc/yum.repos.d/epel.repo
 sudo yum update -y
 
 #Instalando pip e atualizando o pip
-sudo yum install python-pip
+sudo yum install python-pip -y
 sudo -H pip install --upgrade pip
 
 #Removendo o pip dentro da pasta de programa e criando um link com o pip local
@@ -52,7 +52,7 @@ sudo sed -i s/"7"/"6"/g /etc/yum.repos.d/epel.repo
 
 if [ $INSTALL_DB == "Sim" ]; then
 	#Instalando o postgres
-	sudo yum install -y postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs
+	sudo yum install -y postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs -y
 	#Ininciando o serviço de configuraçao inicial do postgres
 	sudo service postgresql initdb
 	#Alterando os arquivos de configuraçao do postgres
