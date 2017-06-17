@@ -3,9 +3,12 @@
 read -p "Deseja Instalar o Banco de Dados? [Sim | Não] " INSTALL_DB
 
 #Configurando repositorio EPEL 7
+sudo yum update -y
+sudo yum install wget
+wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+sudo rpm -ivh epel-release-7-9.noarch.rpm
 wget https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
 sudo mv RPM-GPG-KEY-EPEL-7 /etc/pki/rpm-gpg/
-sudo sed -i s/"6"/"7"/g /etc/yum.repos.d/epel.repo
 
 #Atualizando os pacotes
 sudo yum update -y
@@ -14,23 +17,18 @@ sudo yum update -y
 sudo yum install python-pip -y
 sudo -H pip install --upgrade pip
 
-#Removendo o pip dentro da pasta de programa e criando um link com o pip local
-sudo rm -rf /usr/bin/pip
-sudo ln -s /usr/local/bin/pip /usr/bin/
-
 #Atualizando o setuptools do pip
 sudo -H pip install --upgrade setuptools
 
 #Instalando os pacotes do sistema
-cat dependencias/amazon/yum | xargs sudo yum install -y --enablerepo=epel
+cat dependencias/redhat/yum | xargs sudo yum install -y --enablerepo=epel
 
-#Removendo o pip dentro da pasta de programa e criando um link com o pip local
-#Necessario porque o pip recria a imagem antiga
-sudo rm -rf /usr/bin/pip
-sudo ln -s /usr/local/bin/pip /usr/bin/
+sudo yum remove xmlsec1-1.2.20-5.el7.x86_64 -y
+sudo yum install xmlsec1-1.2.18-4.el7.x86_64 -y
+sudo yum install xmlsec1-devel.x86_64 -y
 
 #Instalando as bibliotecas python
-cat dependencias/amazon/pip | xargs sudo pip install
+cat dependencias/redhat/pip | xargs sudo pip install
 
 #Adicionando o grupo e usuario Odoo, e adicionando no grupo wheel
 sudo groupadd odoo
@@ -47,20 +45,16 @@ sudo git clone -b 10.0 https://github.com/odoo/odoo /odoo/odoo-server --depth 1
 #Alterando a permissão da pasta do Odoo
 sudo chown -R odoo:odoo /odoo/
 
-#Voltando as configurações do repositório EPEL
-sudo sed -i s/"7"/"6"/g /etc/yum.repos.d/epel.repo
-
 if [ $INSTALL_DB == "Sim" ]; then
 	#Instalando o postgres
 	sudo yum install -y postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs -y
 	#Ininciando o serviço de configuraçao inicial do postgres
-	sudo service postgresql initdb
+	sudo postgresql-setup initdb
 	#Alterando os arquivos de configuraçao do postgres
-	sudo sed -i s/"listen_addresses = 'localhost'"/"listen_addresses = ''"/g /var/lib/pgsql9/data/postgresql.conf
-	sudo sed -i s/"local   all             all                                     ident"/"local   all             all                                     trust"/g /var/lib/pgsql9/data/pg_hba.conf
-	sudo sed -i s/"32            ident"/"32            md5"/g /var/lib/pgsql9/data/pg_hba.conf
+	sudo sed -i s/"listen_addresses = 'localhost'"/"listen_addresses = ''"/g /var/lib/pgsql/data/postgresql.conf
+	sudo sed -i s/"local   all             all                                     ident"/"local   all             all                                     trust"/g /var/lib/pgsql/data/pg_hba.conf
+	sudo sed -i s/"32            ident"/"32            md5"/g /var/lib/pgsql/data/pg_hba.conf
 
-	cd /home
 	#Iniciando servico do postgres
 	sudo service postgresql start
 	#Criando o usuario odoo no banco, alterando a senha do usuario do postgres, e criando uma role para o usuario do odoo com permisao de cricao de db
