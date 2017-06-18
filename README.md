@@ -1,13 +1,5 @@
-# SCRIPT
-Este repositório possui uma coleção de scripts para a instalação do Odoo e suas dependências. Os comandos abaixos foram testados em ambientes Ubuntus, RedHat e CentOS.
-
-Para fazer o download deste repositório poderá utilizar os seguintes comandos:
-```sh
-$ cd ~
-$ git clone https://github.com/BradooTech/Scripts
-$ cd Scripts
-```
-Após isso, você estará dentro da pasta principal do repositório.
+# Scripts de Instalação
+Este repositório possui uma coleção de scripts para a instalação do Odoo e suas dependências. Os comandos abaixos foram testados em ambientes Ubuntu, RedHat 7 e Linux Amazon.
 
 ## Instalação
 
@@ -15,67 +7,51 @@ A seguir um guia com todas as dependências necessarias para o funcionamento do 
 
 **Importante notar que a instalação dos pacotes devem ser feitas em um ambiente "limpo", isto é, recomenda-se a instalação em um sistema novo para não ocorrer erros de incompatibilidade de pacotes quando o Odoo for executado.**
 
-
 ### - Ubuntu
 
-Em ambientes derivados de Debian (Ubuntu, Mint etc.) utilizamos o APT como gerenciador de pacotes, para isso podemos instalar os pacotes de duas formas.
+Em ambientes derivados de Debian (Ubuntu, Mint etc.) utilizamos o APT como gerenciador de pacotes. A execução do Script de Instalação é facil sendo somente necessária instalar o pacote do git anteriormente:
 
-A primeira consiste em abrir o arquivo dep_apt, dentro da pasta dependências/apt, copiar todo seu conteúdo e colar no terminal após o comando do APT:
 ```sh
-$ sudo apt install python-libxml2 libxmlsec1-dev python-openssl ...
+$ sudo apt update
+$ sudo apt full-upgrade -y
+$ sudo apt install git
 ```
-Ou podemos redirecionar este arquivo para o APT:
+E posteriormente clonar o repositório e executar o script de instalação:
 ```sh
-$ cat /dependencias/apt/dep_apt | xargs sudo apt install
+$ git clone https://github.com/BradooTech/scripts
+$ cd scripts
+$ sudo ./apt_install.sh
 ```
-**Vale salientar que voce deve estar dentro do diretório principal baixado deste repositório.**
+Após isso é só esperar terminar a instalação e logar com usuario Odoo e executar o 'odoo-bin'
 
-### - RedHat
+### - RedHat 7
 
-O gerenciador de pacotes de distribuições RedHat e seus derivados é o YUM, sendo inteiramente diferente a disposição de instalação dos pacotes. Da mesma forma que o APT, podemos instalar esses dois pacotes de duas formas.
-Antes, pórem, é necessário instalar outro pacote que possibilita a instalação dos pacotes necessários.
-```sh
-$ sudo yum install epel-release
-```
-Após feita sua instalação podemos instalar os pacotes de dependência do Odoo. Neste caso o arquivo será encontrado no diretório dependencias/yum.
-```sh
-$ sudo yum install pyOpenSSL python-cffi zlib-devel fontconfig ...
-```
-Ou podemos redirecionar este arquivo para o YUM:
-```sh
-$ cat /dependencias/apt/dep_apt | xargs sudo yum install
-```
-**Vale salientar que voce deve estar dentro do diretório principal baixado deste repositório.**
+No ambiente de RedHat utilizamos o YUM como gerenciador de pacotes. A execução do Script de Instalação é facil sendo somente necessária instalar o pacote do git anteriormente:
 
-E por ultimo, devemos instalar um pacote com o seguinte comando:
 ```sh
-$ sudo rpm -Uvh ftp://195.220.108.108/linux/centos/7.3.1611/os/x86_64/Packages/xmlsec1-1.2.20-5.el7.i686.rpm
+$ sudo yum update -y
+$ sudo yum install git
 ```
-## Bibiliotecas Python - PIP
+E posteriormente clonar o repositório e executar o script de instalação:
+```sh
+$ git clone https://github.com/BradooTech/scripts
+$ cd scripts
+$ sudo ./redhat_install.sh
+```
+Após isso é só esperar terminar a instalação e logar com usuario Odoo e executar o 'odoo-bin'
 
-O Odoo faz uso de bibliotecas python que não estão instaladas ainda para seu funcionamento. Para isso utilizaremos o utilitario pip para a instalação destas bibliotecas.
-Antes, precisamos atualizar o pip:
-```sh
-$ sudo pip install --upgrade pip
-$ sudo pip install --upgrade setuptools
-```
-### Ubuntu
-As dependências de pip para o ubuntu se encontram no caminho dependecias/apt/dep_pip, levando em conta que você esteja na pasta raiz deste repositório.
-```sh
-$ sudo pip install Babel==1.3 Jinja2==2.7.3 Mako==1.0.1 MarkupSafe==0.23 ...
-```
-Ou
-```sh
-$ cat dependencias/apt/dep_pip | xargs sudo pip install 
-```
+### - Amazon Linux
 
-### RedHat
-As dependências de pip para o RedHat se encontram no caminho dependecias/yum/dep_pip, levando em conta que você esteja na pasta raiz deste repositório.
-```sh
-$ sudo pip install Babel==1.3 Jinja2==2.7.3 Mako==1.0.1 MarkupSafe==0.23 ...
-```
-Ou
-```sh
-$ cat dependencias/yum/dep_pip | xargs sudo pip install 
-```
+No ambiente de Linux da Amazon utilizamos o YUM como gerenciador de pacotes. A execução do Script de Instalação é facil sendo somente necessária instalar o pacote do git anteriormente:
 
+```sh
+$ sudo yum update -y
+$ sudo yum install git
+```
+E posteriormente clonar o repositório e executar o script de instalação:
+```sh
+$ git clone https://github.com/BradooTech/scripts
+$ cd scripts
+$ sudo ./redhat_install.sh
+```
+Após isso é só esperar terminar a instalação e logar com usuario Odoo e executar o 'odoo-bin'
