@@ -4,7 +4,7 @@ read -p "Deseja Instalar o Banco de Dados? [Sim | Não] " INSTALL_DB
 
 #Configurando repositorio EPEL 7
 sudo yum update -y
-sudo yum install wget
+sudo yum install wget -y
 wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
 sudo rpm -ivh epel-release-7-9.noarch.rpm
 wget https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
@@ -23,6 +23,7 @@ sudo -H pip install --upgrade setuptools
 #Instalando os pacotes do sistema
 cat dependencias/redhat/yum | xargs sudo yum install -y --enablerepo=epel
 
+#Necessário para instalação das bibliotecas python
 sudo yum remove xmlsec1-1.2.20-5.el7.x86_64 -y
 sudo yum install xmlsec1-1.2.18-4.el7.x86_64 -y
 sudo yum install xmlsec1-devel.x86_64 -y
@@ -64,3 +65,5 @@ if [ $INSTALL_DB == "Sim" ]; then
 	sudo -u postgres -- psql -c "DROP ROLE odoo;"
 	sudo -u postgres -- psql -c "CREATE ROLE odoo LOGIN ENCRYPTED PASSWORD 'md5f7b7bca97b76afe46de6631ff9f7175c' NOSUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION"
 fi
+
+sudo yum-complete-transaction --cleanup-only
