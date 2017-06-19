@@ -1,0 +1,110 @@
+#!/bin/bash
+# Init for run Odoo Service
+# © 2017 Gabriel Balog, BradooTech
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# chkconfig: 2345 95 05
+# absolute path to executable binary
+NAME=odoo-server
+PATH=/bin:/sbin:/usr/bin
+DAEMON=/odoo/odoo-server/odoo-bin
+USER=odoo
+
+# binary program name
+prog=$(basename $NAME)
+
+# pid file
+PIDFILE="/var/run/odoo/${NAME}.pid"
+CONFIGFILE="/etc/odoo-server.conf"
+DAEMON_OPTS="-c $CONFIGFILE"
+[ -x $DAEMON ] || exit 0
+[ -f $CONFIGFILE ] || exit 0
+checkpid() {
+[ -f $PIDFILE ] || return 1
+pid=`cat $PIDFILE`
+[ -d /proc/$pid ] && return 0
+return 1
+}
+
+# make sure full path to executable binary is found
+! [ -x $DAEMON ] && echo "$DAEMON: executable not found" && exit 1
+
+eval_cmd() {
+  local rc=$1
+  if [ $rc -eq 0 ]; then
+    echo '[  OK  ]'
+  else
+    echo '[FAILED]'
+  fi
+  return $rc
+}
+
+start() {
+  # see if running
+  local pids=$(pgrep -u $USER python)
+
+  if [ -n "$pids" ]; then
+    echo "$NAME (pid $pids) is already running"
+    return 0
+  fi
+  printf "%-50s%s" "Starting $NAME: " ''
+  if [ ! -d /var/run/odoo ]; then
+      mkdir /var/run/odoo/
+      chown $USER:$USER /var/run/odoo/
+    fi
+  start-stop-daemon --start --pidfile $PIDFILE --chuid $USER --background --quiet --make-pidfile --exec $DAEMON -- $DAEMON_OPTS
+  
+
+  # check again if running
+  pgrep -u $USER python >/dev/null 2>&1
+  eval_cmd $?
+}
+
+stop() {
+  # see if running
+  local pids=$(pgrep -u $USER python)
+
+  if [ -z "$pids" ]; then
+    echo "$NAME not running"
+    return 0
+  fi
+  printf "%-50s%s" "Stopping $NAME: " ''
+  rm -f $pidfile
+  kill -9 $pids
+
+  eval_cmd $?
+}
+
+status() {
+  # see if running
+  local pids=$(pgrep -u $USER python)
+
+  if [ -n "$pids" ]; then
+    echo "$NAME (pid $pids) is running"
+  else
+    echo "$NAME is stopped"
+  fi
+}
+
+
+
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart)
+    stop
+    sleep 1
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status|restart}"
+    exit 1
+esac
+
+exit $?

@@ -46,6 +46,28 @@ sudo git clone -b 10.0 https://github.com/odoo/odoo /odoo/odoo-server --depth 1
 #Alterando a permissão da pasta do Odoo
 sudo chown -R odoo:odoo /odoo/
 
+#Adicionando o arquivo de init
+sudo cp dependencias/redhat/odoo-server /etc/init.d/
+
+#Adiciona o odoo-server.conf
+cat <<EOF > /etc/odoo-server.conf
+[options]
+; This is the password that allows database operations:
+; admin_passwd = admin
+db_host = False
+db_port = False
+db_user = odoo
+db_password = False
+addons_path = odoo/odoo-server/addons
+log_db = False
+log_db_level = warning
+log_handler = :INFO
+log_level = info
+logfile = /var/log/odoo/odoo-server.log
+xmlrpc_port = 8069
+EOF
+
+
 if [ $INSTALL_DB == "Sim" ]; then
 	#Instalando o postgres
 	sudo yum install -y postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs -y
@@ -65,5 +87,7 @@ if [ $INSTALL_DB == "Sim" ]; then
 	sudo -u postgres -- psql -c "DROP ROLE odoo;"
 	sudo -u postgres -- psql -c "CREATE ROLE odoo LOGIN ENCRYPTED PASSWORD 'md5f7b7bca97b76afe46de6631ff9f7175c' NOSUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION"
 fi
-
+sudo systemctl enable postgresql.service
+sudo chkconfig --add odoo-server 
+sudo chkconfig --level 2345 odoo-server on
 sudo yum-complete-transaction --cleanup-only
