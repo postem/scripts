@@ -29,7 +29,7 @@ if [ $INSTALL_DB == "Sim" ]; then
   sudo sed -i s/"listen_addresses = 'localhost'"/"listen_addresses = ''"/g /etc/postgresql/9.5/main/postgresql.conf
   sudo sed -i s/"local   all             all                                     ident"/"local   all             all                                     trust"/g /etc/postgresql/9.5/main/pg_hba.conf
   sudo sed -i s/"32            ident"/"32            md5"/g /etc/postgresql/9.5/main/pg_hba.conf
-
+fi
 
 # Criando usuario odoo no SO
 sudo adduser --system --quiet --shell=/bin/bash --home=/odoo --gecos 'ODOO' --group odoo
