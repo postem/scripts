@@ -72,7 +72,7 @@ EOF
 cd /usr/local/src
 sudo wget http://developer.axis.com/download/distribution/apps-sys-utils-start-stop-daemon-IR1_9_18-2.tar.gz
 sudo tar zxvf apps-sys-utils-start-stop-daemon-IR1_9_18-2.tar.gz
-sudo cd apps/sys-utils/start-stop-daemon-IR1_9_18-2
+cd apps/sys-utils/start-stop-daemon-IR1_9_18-2
 sudo gcc start-stop-daemon.c -o start-stop-daemon
 sudo cp start-stop-daemon /usr/sbin/
 
