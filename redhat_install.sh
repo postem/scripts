@@ -48,6 +48,8 @@ sudo chown -R odoo:odoo /odoo/
 
 #Adicionando o arquivo de init
 sudo cp dependencias/redhat/odoo-server /etc/init.d/
+sudo chmod 755 /etc/init.d/odoo-server
+sudo chown root: /etc/init.d/odoo-server
 
 #Adiciona o odoo-server.conf
 cat <<EOF > /etc/odoo-server.conf
@@ -67,6 +69,12 @@ logfile = /var/log/odoo/odoo-server.log
 xmlrpc_port = 8069
 EOF
 
+cd /usr/local/src
+sudo wget http://developer.axis.com/download/distribution/apps-sys-utils-start-stop-daemon-IR1_9_18-2.tar.gz
+sudo tar zxvf apps-sys-utils-start-stop-daemon-IR1_9_18-2.tar.gz
+sudo cd apps/sys-utils/start-stop-daemon-IR1_9_18-2
+sudo gcc start-stop-daemon.c -o start-stop-daemon
+sudo cp start-stop-daemon /usr/sbin/
 
 if [ $INSTALL_DB == "Sim" ]; then
 	#Instalando o postgres

@@ -14,7 +14,7 @@ Em ambientes derivados de Debian (Ubuntu, Mint etc.) utilizamos o APT como geren
 ```sh
 $ sudo apt update
 $ sudo apt full-upgrade -y
-$ sudo apt install git
+$ sudo apt install git -y
 ```
 E posteriormente clonar o repositório e executar o script de instalação:
 ```sh
@@ -30,7 +30,7 @@ No ambiente de RedHat utilizamos o YUM como gerenciador de pacotes. A execução
 
 ```sh
 $ sudo yum update -y
-$ sudo yum install git
+$ sudo yum install git -y
 ```
 E posteriormente clonar o repositório e executar o script de instalação:
 ```sh
@@ -46,7 +46,7 @@ No ambiente de Linux da Amazon utilizamos o YUM como gerenciador de pacotes. A e
 
 ```sh
 $ sudo yum update -y
-$ sudo yum install git
+$ sudo yum install git -y
 ```
 E posteriormente clonar o repositório e executar o script de instalação:
 ```sh
