@@ -186,7 +186,7 @@ sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons,$O
 
 clear
 echo -e "* Create init file"
-cat <<EOF > /home/dev/$OE_CONFIG
+cat <<EOF > /home/$OE_CONFIG
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides: $OE_CONFIG
@@ -253,7 +253,7 @@ EOF
 
 clear
 echo -e "* Security Init File"
-sudo mv /home/dev/$OE_CONFIG /etc/init.d/$OE_CONFIG
+sudo mv /home/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
 
