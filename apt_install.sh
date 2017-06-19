@@ -130,7 +130,7 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 #--------------------------------------------------
 
 clear
-read line
+
 echo -e "\e[31;43m***** Instalando Odoo-Server *****\e[0m"
 sudo git clone -b 10.0 --single-branch --depth 1 https://github.com/BradooTech/odoo $OE_HOME_EXT/
 
