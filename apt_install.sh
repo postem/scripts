@@ -186,7 +186,7 @@ sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons,$O
 
 clear
 echo -e "* Create init file"
-cat <<EOF > /home/$OE_CONFIG
+sudo cat <<EOF > ~/odoo-server
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides: $OE_CONFIG
