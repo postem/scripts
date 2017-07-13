@@ -1,7 +1,7 @@
 # Scripts de Instalação
 Este repositório possui uma coleção de scripts para a instalação do Odoo e suas dependências. Os comandos abaixos foram testados em ambientes Ubuntu, RedHat 7 e Linux Amazon.
 
-## Instalação
+## Instalação Odoo
 
 A seguir um guia com todas as dependências necessarias para o funcionamento do Odoo.
 
@@ -20,7 +20,7 @@ E posteriormente clonar o repositório e executar o script de instalação:
 ```sh
 $ git clone https://github.com/BradooTech/scripts
 $ cd scripts
-$ sudo ./apt_install.sh
+$ sudo ./ubuntu_install.sh
 ```
 Após isso é só esperar terminar a instalação e logar com usuario Odoo e executar o 'odoo-bin'
 
@@ -54,4 +54,12 @@ $ git clone https://github.com/BradooTech/scripts
 $ cd scripts
 $ sudo ./redhat_install.sh
 ```
+## Instalação Localização
+
+A seguir os passos para o funcionamento do Odoo com a localização.
+```sh
+$ cd scripts
+$ sudo ./localizacao.sh
+```
+
 Após isso é só esperar terminar a instalação e logar com usuario Odoo e executar o 'odoo-bin'
