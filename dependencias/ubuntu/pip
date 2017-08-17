@@ -48,3 +48,4 @@ python-boleto
 python-cnab
 http://labs.libre-entreprise.org/frs/download.php/897/pyxmlsec-0.3.1.tar.gz
 numpy
+urllib3

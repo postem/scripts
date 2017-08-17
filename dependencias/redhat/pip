@@ -52,3 +52,4 @@ http://pkgs.fedoraproject.org/repo/pkgs/PyXML/PyXML-0.8.4.tar.gz/1f7655050cebbb6
 zsi
 xmlsec
 numpy
+urllib3
