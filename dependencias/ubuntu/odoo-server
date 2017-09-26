@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides: 
+# Provides: odoo-server
 # Required-Start: $remote_fs $syslog
 # Required-Stop: $remote_fs $syslog
 # Should-Start: $network
