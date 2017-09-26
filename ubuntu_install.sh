@@ -69,3 +69,4 @@ EOF
 sudo cp dependencias/ubuntu/odoo-server /etc/init.d/
 sudo chmod 755 /etc/init.d/odoo-server
 sudo chown root: /etc/init.d/odoo-server
+sudo update-rc.d odoo-server defaults
