@@ -36,3 +36,6 @@ libpq-dev
 libjpeg-dev
 nodejs
 npm
+xvfb
+libfontconfig
+wkhtmltopdf
